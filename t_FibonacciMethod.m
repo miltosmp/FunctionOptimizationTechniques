@@ -8,6 +8,7 @@ f3 = @(x) exp(x)*(x.^3-1) + (x-1)*sin(x);
 
 a = -1;
 b = 3;
+epsilon = 0.01;
 
 
 % Part 1
@@ -17,23 +18,16 @@ num3 = zeros();
 for i = 1:10
     l = 10^(-i);
     
-    [a1, ~, minFound] = GoldenSectionMethod(f1, l, a, b);
+    [a1, ~] = FibonacciMethod(f1, epsilon, l, a, b);
     num1(i) = size(a1, 2);
-    if minFound == 0
-        num1(i) = NaN;
-    end
     
-    [a2, ~, minFound] = GoldenSectionMethod(f2, l, a, b);
+    tic
+    [a2, ~] = FibonacciMethod(f2, epsilon, l, a, b);
     num2(i) = size(a2, 2);
-    if minFound == 0
-        num2(i) = NaN;
-    end
     
-    [a3, ~, minFound] = GoldenSectionMethod(f3, l, a, b);
+    tic
+    [a3, ~] = FibonacciMethod(f3, epsilon, l, a, b);
     num3(i) = size(a3, 2);
-    if minFound == 0
-        num3(i) = NaN;
-    end
 end
 
 figure(1);
@@ -55,13 +49,13 @@ b2 = zeros();
 b3 = zeros();
 
 for i = 1:6
-    [a_f1, b_f1, ~] = GoldenSectionMethod(f1, l(i), a, b);
+    [a_f1, b_f1] = FibonacciMethod(f1, epsilon, l(i), a, b);
     a1(i, 1:length(a_f1)) = a_f1;
     b1(i, 1:length(b_f1)) = b_f1;
-    [a_f2, b_f2, ~] = GoldenSectionMethod(f2, l(i), a, b);
+    [a_f2, b_f2] = FibonacciMethod(f2, epsilon, l(i), a, b);
     a2(i, 1:length(a_f2)) = a_f2;
     b2(i, 1:length(b_f2)) = b_f2;
-    [a_f3, b_f3, ~] = GoldenSectionMethod(f3, l(i), a, b);
+    [a_f3, b_f3] = FibonacciMethod(f3, epsilon, l(i), a, b);
     a3(i, 1:length(a_f3)) = a_f3;
     b3(i, 1:length(b_f3)) = b_f3;
 end
@@ -71,4 +65,3 @@ plot(nonzeros(a1(1, :)));
 hold on;
 plot(nonzeros(b1(1,:)));
 title("Method Convergence to function minimum");
-
