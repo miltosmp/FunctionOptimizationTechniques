@@ -41,6 +41,16 @@ for i = 1:10
     end
 end
 
+figure(1);
+subplot(2, 2, 1);
+plot(times_e1);
+subplot(2, 2, 2);
+plot(times_e2);
+subplot(2, 2, 3);
+plot(times_e3);
+sgtitle("Minimization time for each function")
+
+
 % Part 2 
 epsilon = 0.001;
 l = [0.1 0.05 0.01 0.0075 0.005 0.0025];
@@ -68,6 +78,13 @@ for i = 1:6
     end
 end
 
+figure(2);
+plot(l, num_l1);
+hold on;
+plot(l, num_l2);
+plot(l, num_l3);
+title("Number of function calls vs final interval")
+
 % Part 3
 l = [0.1 0.05 0.01 0.0075 0.005 0.0025];
 epsilon = 0.001;
@@ -90,3 +107,8 @@ for i = 1:6
     b3(i, 1:length(b_f3)) = b_f3;
 end
 
+figure(3);
+plot(nonzeros(a1(1, :)));
+hold on;
+plot(nonzeros(b1(1,:)));
+title("Method Convergence to function minimum");
